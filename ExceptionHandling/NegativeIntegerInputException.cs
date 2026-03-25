@@ -8,7 +8,8 @@ namespace ExceptionHandling
 {
     internal class NegativeIntegerInputException : Exception
     {
-        public NegativeIntegerInputException() : base("This operation does not accept negative values. Please try again.")
+        public NegativeIntegerInputException(int[] values)
+            : base("The following negative integer(s) are not allowed in this operation: " + string.Join(",", values))
         {
 
         }

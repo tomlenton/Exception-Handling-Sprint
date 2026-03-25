@@ -11,10 +11,6 @@ namespace ExceptionHandling
     {
         public static int Divide(int a, int b)
         {
-            if (a < 0 || b < 0)
-            {
-                throw new NegativeIntegerInputException();
-            }
             return a / b;
         }
         public static void DivideUserInputs()
@@ -35,9 +31,9 @@ namespace ExceptionHandling
                 {
                     Console.WriteLine("Cannot divide by zero. Please try again.");
                 }
-                catch (NegativeIntegerInputException)
+                catch (NegativeIntegerInputException e)
                 {
-                    Console.WriteLine("This operation does not accept negative values. Please try again.");
+                    Console.WriteLine(e.Message);
                 }
                 
             }
@@ -48,6 +44,19 @@ namespace ExceptionHandling
             int a = int.Parse(Console.ReadLine());
             Console.WriteLine("Enter dividend:");
             int b = int.Parse(Console.ReadLine());
+            if (a < 0 && b < 0)
+            {
+                throw new NegativeIntegerInputException(new int[] { a, b });
+
+            }
+            else if (a < 0)
+            {
+                throw new NegativeIntegerInputException(new int[] { a });
+            }
+            if (b < 0)
+            {
+                throw new NegativeIntegerInputException(new int[] { b });
+            }
             return new int[] { a, b };
         }
     }
